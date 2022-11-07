@@ -76,7 +76,7 @@ python train.py --help
 To use the model for NER tagging, the generation script can be used. This will take a sentence in and produce a tagged entity sequence out. An example generation command is provided here:
 ```bash
 python generate.py --model_dir ./models/test_model --input "The man from Germany went to London to work for Google with his wife Henreitta Klein."
-# Expected output: "Germany | person | London | location | Google | organisation | Henrietta Klein | person"
+# Expected output: "Germany | location | London | location | Google | organisation | Henrietta Klein | person"
 ```
 
 ---
