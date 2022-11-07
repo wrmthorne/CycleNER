@@ -1,6 +1,8 @@
 # CycleNER
 
-This is a project implementing an [Original Paper](https://dl.acm.org/doi/10.1145/3485447.3512012) by Andrea Iovine, Anjie Fang, Besnik Fetahu, Oleg Rokhlenko, Shervin Malmasi.
+CycleNER is an [Original Paper](https://dl.acm.org/doi/10.1145/3485447.3512012) by Andrea Iovine, Anjie Fang, Besnik Fetahu, Oleg Rokhlenko, Shervin Malmasi.
+
+**This code was not produced by these authors. This is my own implementation based on the paper contents.**
 
 CycleNER uses cycle-consistency training for two functions: sequence-to-entity (S2E); and entity-to-sequence (E2S), to learn NER tags from some seed set of sentences and another set of entity examples. The output from one function is the input the the other and the algorithm attempts to align each representation space, thus, learning to tag named entities in an unsupervised manner.
 
@@ -22,12 +24,12 @@ All data, stored in json format, must be of the form:
 ```
 
 A script has been provided for experiments using the CoNLL2003 dataset called `format_conll_data.py`. Using the provided parameters, differing quantities of samples can be used for the S2E training set and E2S training set. An example command is provided here:
-```
+```bash
 python format_conll_data.py --s_examples 10000 --e_examples 1000
 ``` 
 
 For a full set of options, use:
-```
+```bash
 python format_conll_data.py --help
 ```
 
@@ -40,12 +42,12 @@ There are 3 classes of data in this model: `train`, `eval`, and `test`. Training
 | test        | yes           |
 
 An example command is provided for preparing data. Please note that file locations will likely differ:
-```
+```bash
 python prepare.py --model_name test_model --model_dir ./models --train_dir ./data/train --eval_dir ./data/eval --test_dir ./data/test
 ```
 
 For a full set of options, use:
-```
+```bash
 python prepare.py --help
 ```
 
@@ -58,12 +60,12 @@ Once the model has been prepared, all required files for training will be stored
 The iterative training stage performs the cycle-consistency training outlined above. The model iterates between S- and E- cycles until all of one of the datasets is complete. Only cycles for the remaining data are then used until all data from both sets are consumed, at which point the epoch is complete. At each epoch, the model is evaluated against the evaluation set for S2E loss, E2S loss and S2E-f1. The training stage (if you really want?) can be skipped.
 
 An example training command is provided here:
-```
+```bash
 python train.py --model_dir ./models/test_model --output_dir ./checkpoints/test_model --batch_size 64 --s2e_lr 3e-4 --e2s_lr 3e-4
 ```
 
 For a full list of options, use:
-```
+```bash
 python train.py --help
 ```
 
@@ -72,8 +74,9 @@ python train.py --help
 ### Inference
 
 To use the model for NER tagging, the generation script can be used. This will take a sentence in and produce a tagged entity sequence out. An example generation command is provided here:
-```
-python generate.py --model_dir ./models/test_model --input "The man from Germany went to London to work for Google with his wife Henreitta."
+```bash
+python generate.py --model_dir ./models/test_model --input "The man from Germany went to London to work for Google with his wife Henreitta Klein."
+# Expected output: "Germany | person | London | location | Google | organisation | Henrietta Klein | person"
 ```
 
 ---
@@ -81,7 +84,7 @@ python generate.py --model_dir ./models/test_model --input "The man from Germany
 ### Training Inspection
 
 Checkpoints for training are stored, by default, in the model folder but the output directory can be changed. SummaryWriter is used to log the progress of training for a number of different variables - the outputs of which can be explored in `extract_runs_data.ipynb`. Alternatively, tensorboard can be used with the command:
-```
+```bash
 tensorboard --logdir ./runs
 ```
 
@@ -90,7 +93,7 @@ tensorboard --logdir ./runs
 ## Parameter Searching
 
 To search for the best training parameters, `train_grid_search.sh` has been provided to iterate over different permutations of parameters. Update the parameters in the script's arrays for search over that space. The script can be run with:
-```
+```bash
 chmod +x train_grid_search.sh
 ./train_grid_search.sh
 ```
