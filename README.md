@@ -1,8 +1,34 @@
-# CycleNER
+# CycleNER - WORK IN PROGRESS
+
+## TODO:
+
+* Add requirements.txt/script to build venv and install all packages
+* Add learning rate and optimiser schedulers
+* Add license
+* Add remote fetch feature to from_pretrained() on CycleNER model to allow fetching from this remote repository when using in other projects
+
+---
 
 CycleNER is an [Original Paper](https://dl.acm.org/doi/10.1145/3485447.3512012) by Andrea Iovine, Anjie Fang, Besnik Fetahu, Oleg Rokhlenko, Shervin Malmasi.
 
-**This code was not produced by these authors. This is my own implementation based on the paper contents.**
+**This code was not produced by these authors. This is my own implementation based on the paper contents. Please cite the original authors, using the bibtex segment below, if you use this code in your work:**
+
+```bibtex
+@inproceedings{10.1145/3485447.3512012,
+author = {Iovine, Andrea and Fang, Anjie and Fetahu, Besnik and Rokhlenko, Oleg and Malmasi, Shervin},
+title = {CycleNER: An Unsupervised Training Approach for Named Entity Recognition},
+year = {2022},
+isbn = {9781450390965},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3485447.3512012},
+doi = {10.1145/3485447.3512012},
+booktitle = {Proceedings of the ACM Web Conference 2022},
+pages = {2916–2924},
+location = {Virtual Event, Lyon, France},
+series = {WWW '22}
+}
+```
 
 CycleNER uses cycle-consistency training for two functions: sequence-to-entity (S2E); and entity-to-sequence (E2S), to learn NER tags from some seed set of sentences and another set of entity examples. The output from one function is the input the the other and the algorithm attempts to align each representation space, thus, learning to tag named entities in an unsupervised manner.
 

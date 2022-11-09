@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 echo "Starting CycleNER Grid Search"
-source "../gatenlp_venv/bin/activate"
+source "../cycle_ner_venv/bin/activate"
 
 OUTPUT_TXT="train_grid_search.txt"
 
