@@ -1,11 +1,6 @@
 # CycleNER - WORK IN PROGRESS
 
-## TODO:
-
-* Add requirements.txt/script to build venv and install all packages
-* Add learning rate and optimiser schedulers
-* Add license
-* Add remote fetch feature to from_pretrained() on CycleNER model to allow fetching from this remote repository when using in other projects
+`UPDATE`: This repository will no longer be updated but will remain public. I have developed generic template for cycle consistency training [here](https://github.com/wrmthorne/CycleLightning/tree/main) and will be the only place that receives updates relating to this project. A tutorial for CycleNER has been added [here](https://github.com/wrmthorne/CycleLightning/tree/main/Tutorials/CycleNER) with the script to format CoNLL and an example training bash script. The new repository is easier to use, more flexible and makes use of more modern features offered by Transformers, Peft, pytorch and pytorch-lightning.
 
 ---
 
